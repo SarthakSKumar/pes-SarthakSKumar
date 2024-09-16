@@ -75,7 +75,7 @@ The solution consists of two main components: Google Apps Script and an web serv
 
 2. **Web Service**:
    - **CRUD Operations**: The web service receives the data from the Apps Script and determines the type of change *(create, update, delete)* to be applied to the **MySQL** database.
-   - **BullMQ for Job Management**: Changes are processed by a worker as jobs in a queue managed by **BullMQ** on **Redis**. This ensures that row-level or specific cell-level changes in the sheet are reflected in the MySQL database with near real-time performance.
+   - **BullMQ for Job Management**: Changes are processed by a worker as jobs in a queue managed by **BullMQ** on **Redis**. This ensures that row-level or cell-level changes in the sheet are reflected in the db with in real-time.
 
 3. **Simulating DB CRUD Operations**:
    - I’ve created APIs to handle `POST`, `PUT`, and `DELETE` requests. These simulate clients making updates directly to the database.
@@ -108,3 +108,8 @@ The solution consists of two main components: Google Apps Script and an web serv
 3. **Improvisations**:
     - **Data Types**: Ensure the synchronization process is aware of the data types being updated. Handle specific types such as numbers, strings, constants, and timestamps appropriately to maintain data integrity. This will prevent issues like incorrect type casting or format mismatches between Google Sheets and the database.
     - **Batch API Calls**: Instead of triggering an API call for every change, accumulate changes in batches and send them together. This reduces the number of network requests.
+
+
+### Running the application
+
+I am running the web service locally and using **Tailscale** Funnel to expose the service by forwarding the local port where the server runs. The public URL is then used in the Apps Script to perform ops. For job management, I’m using **Redis Cloud**.
