@@ -59,4 +59,52 @@ We're available at techhiring@superjoin.ai for all queries.
 All the best ✨.
 
 ## Developer's Section
-*Add your video here, and your approach to the problem (optional). Leave some comments for us here if you want, we will be reading this :)*
+
+**Video Section:**
+(*Add your video here when ready.*)
+
+---
+
+### My Approach
+
+The solution consists of two main components: Google Apps Script and an web service. These work together to enable real-time synchronization of data between Google Sheets and a MySQL database.
+
+1. **Google Apps Script**:
+   - **Trigger**: The Apps Script is deployed as a *Web App* and has an edit trigger. Whenever an edit is made in the sheet, this function is triggered.
+   - **Data Synchronization**: The script gathers the changed data and sends it via an API request to my web service. This ensures that the database is updated in real-time based on changes made to the Google Sheet.
+
+2. **Web Service**:
+   - **CRUD Operations**: The web service receives the data from the Apps Script and determines the type of change *(create, update, delete)* to be applied to the **MySQL** database.
+   - **BullMQ for Job Management**: Changes are processed by a worker as jobs in a queue managed by **BullMQ** on **Redis**. This ensures that row-level or specific cell-level changes in the sheet are reflected in the MySQL database with near real-time performance.
+
+3. **Simulating DB CRUD Operations**:
+   - I’ve created APIs to handle `POST`, `PUT`, and `DELETE` requests. These simulate clients making updates directly to the database.
+   - When a change occurs in the database, it triggers a job that pushes the required data to the Google Sheet via the Apps Script API.
+   - The Apps Script then handles the data, updates the appropriate rows/cells, and reflects the changes back in the Google Sheet in real-time.
+
+4. **Technologies Used**:
+   - **Google Apps Script**: For managing Google Sheets triggers and updates.
+   - **Express.js**: To handle API requests and interact with the database.
+   - **BullMQ**: To manage job queues for efficient processing.
+   - **Redis**: Redis Cloud for job management.
+   - **MySQL**: My chosen DB for this project.
+
+5. **API Documentation**:
+   - `POSTMAN DOCUMENTER`: [Click here](https://documenter.getpostman.com/view/22931938/2sAXqp8P1K)
+---
+
+### Pros/Cons/Considerations of the Approach
+
+1. **Pros**:
+    - **Near Real-time Sync**: Minimal delay between changes in Google Sheets and DB.
+    - **Granularity**: Supports row-level and cell-level changes. No need to sync entire sheet/db.
+    - **Scalability**: Can handle a large number of changes efficiently (BullMQ + Redis) without performance degradation.
+    - **Conflict Resolution**: The system handles conflicts with a simple strategy of *last write wins*, ensuring data consistency.
+
+2. **Cons**:
+    - **Latency**: Its still queue processing, so there might be a slight delay in syncing data in large volumes.
+    - **Last-write isn't the best**: Conflicting updates at nearly same time, might not be the best strategy for all use-cases.
+
+3. **Improvisations**:
+    - **Data Types**: Ensure the synchronization process is aware of the data types being updated. Handle specific types such as numbers, strings, constants, and timestamps appropriately to maintain data integrity. This will prevent issues like incorrect type casting or format mismatches between Google Sheets and the database.
+    - **Batch API Calls**: Instead of triggering an API call for every change, accumulate changes in batches and send them together. This reduces the number of network requests.
