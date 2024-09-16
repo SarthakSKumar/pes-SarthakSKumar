@@ -45,11 +45,11 @@ Once you're done, make sure you **record a video** showing your project working.
 
 We have a checklist at the bottom of this README file, which you should update as your progress with your assignment. It will help us evaluate your project.
 
-- [ ] My code's working just fine! 🥳
-- [ ] I have recorded a video showing it working and embedded it in the README ▶️
-- [ ] I have tested all the normal working cases 😎
-- [ ] I have even solved some edge cases (brownie points) 💪
-- [ ] I added my very planned-out approach to the problem at the end of this README 📜
+- [x] My code's working just fine! 🥳
+- [x] I have recorded a video showing it working and embedded it in the README ▶️
+- [x] I have tested all the normal working cases 😎
+- [x] I have even solved some edge cases (brownie points) 💪
+- [x] I added my very planned-out approach to the problem at the end of this README 📜
 
 ## Got Questions❓
 Feel free to check the discussions tab, you might get some help there. Check out that tab before reaching out to us. Also, did you know, the internet is a great place to explore? 😛
@@ -61,13 +61,16 @@ All the best ✨.
 ## Developer's Section
 
 **Video Section:**
-(*Add your video here when ready.*)
+
+https://github.com/user-attachments/assets/20e1ac00-0ba8-4aab-a75b-498a3b3f5383
 
 ---
 
-### My Approach
+## My Approach
+<img src = "https://sarthakskumar.com/images/temp.png" width="50%"></img>
 
-The solution consists of two main components: Google Apps Script and an web service. These work together to enable real-time synchronization of data between Google Sheets and a MySQL database.
+
+The solution consists of two main components: Google Apps Script and a web service. These work together to enable real-time synchronization of data between Google Sheets and a MySQL database.
 
 **Google Apps Script**:
 - **Trigger**: The Apps Script is deployed as a *Web App* and has an edit trigger. Whenever an edit is made in the sheet, this function is triggered.
