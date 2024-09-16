@@ -89,7 +89,7 @@ The solution consists of two main components: Google Apps Script and an web serv
 - **Redis**: Redis Cloud for job management.
 - **MySQL**: My chosen DB for this project.
 
-5. **API Documentation**:
+**API Documentation**:
 - `POSTMAN DOCUMENTER`: [Click here](https://documenter.getpostman.com/view/22931938/2sAXqp8P1K)
 ---
 
@@ -108,8 +108,8 @@ The solution consists of two main components: Google Apps Script and an web serv
 **Improvisations**:
 - **Data Types**: Ensure the synchronization process is aware of the data types being updated. Handle specific types such as numbers, strings, constants, and timestamps appropriately to maintain data integrity. This will prevent issues like incorrect type casting or format mismatches between Google Sheets and the database.
 - **Batch API Calls**: Instead of triggering an API call for every change, accumulate changes in batches and send them together. This reduces the number of network requests.
-
+---
 
 ### Running the application
 
-I am running the web service locally and using **Tailscale** Funnel to expose the service by forwarding the local port where the server runs. The public URL is then used in the Apps Script to perform ops. For job management, I’m using **Redis Cloud**.
+I am running the web service locally and using **Tailscale** Funnel to expose the service by forwarding the local port where the server runs. The public URL is then used in the Apps Script to perform ops. For job management, I’m using **Redis Cloud**, and Beekeeper Studio for managing the MySQL database. Postman to test the client CRUD APIs for DB.
